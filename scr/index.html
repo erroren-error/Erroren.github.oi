@@ -4,184 +4,493 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ERROREN — Create, Build & Grow</title>
+  <title>ERROREN — Create. Build. Grow.</title>
 
-  <meta
-    name="description"
-    content="ERROREN — Web development, app development, SEO, graphic design, AI, social media and more."
-  >
+  <meta name="description"
+    content="ERROREN — powerful tools for web, apps, SEO, design, AI, social media and more.">
 
   <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #111318;
+      --muted: #707582;
+      --border: #e7e9ef;
+      --accent: #6c4cff;
+      --accent-2: #8b5cf6;
+      --shadow: 0 18px 50px rgba(20, 20, 40, .08);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f8fc;
-      color: #111827;
-      line-height: 1.6;
+    html {
+      scroll-behavior: smooth;
     }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: .3s ease;
+    }
+
+    body.dark {
+      --bg: #08090d;
+      --surface: #11131a;
+      --text: #f5f7fb;
+      --muted: #9da3b0;
+      --border: #242733;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    /* NAVBAR */
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 6%;
-      background: white;
-      border-bottom: 1px solid #e5e7eb;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(255,255,255,.78);
+      border-bottom: 1px solid var(--border);
     }
 
-    .logo {
-      font-size: 28px;
-      font-weight: 900;
+    body.dark header {
+      background: rgba(8,9,13,.78);
+    }
+
+    .nav {
+      max-width: 1250px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 23px;
+      font-weight: 950;
       letter-spacing: 2px;
     }
 
-    nav {
-      display: flex;
-      gap: 24px;
-      align-items: center;
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 8px 25px rgba(108,76,255,.3);
+      font-weight: 950;
     }
 
-    nav a {
-      text-decoration: none;
-      color: #374151;
-      font-weight: 600;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
     }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+    }
+
+    .login-btn {
+      border: 0;
+      background: var(--text);
+      color: var(--bg);
+      padding: 11px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+    }
+
+    /* HERO */
 
     .hero {
+      max-width: 1150px;
+      margin: auto;
+      padding: 105px 24px 75px;
       text-align: center;
-      padding: 90px 20px 70px;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 25px;
     }
 
     .hero h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      font-weight: 900;
-      letter-spacing: -3px;
-      margin-bottom: 20px;
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 1;
+      letter-spacing: -4px;
+      font-weight: 950;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     .hero p {
       max-width: 700px;
-      margin: auto;
-      color: #6b7280;
+      margin: 25px auto;
+      color: var(--muted);
       font-size: 18px;
     }
 
-    .search-box {
-      max-width: 720px;
+    /* SEARCH */
+
+    .search {
+      max-width: 760px;
       margin: 35px auto 0;
-      display: flex;
-      background: white;
       padding: 8px;
-      border-radius: 18px;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
     }
 
-    .search-box input {
+    .search input {
       flex: 1;
-      border: none;
-      outline: none;
-      padding: 16px;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 17px;
       font-size: 16px;
     }
 
-    button {
-      border: none;
-      background: #111827;
-      color: white;
+    .search button,
+    .primary {
+      border: 0;
       padding: 14px 22px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 700;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font-weight: 850;
     }
+
+    .search-options {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .search-options span {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+    }
+
+    /* SECTIONS */
 
     section {
-      padding: 65px 6%;
+      max-width: 1250px;
+      margin: auto;
+      padding: 75px 24px;
     }
 
-    .section-title {
-      text-align: center;
-      font-size: 34px;
-      margin-bottom: 35px;
+    .section-head {
+      margin-bottom: 30px;
     }
+
+    .section-head h2 {
+      font-size: 36px;
+      letter-spacing: -1px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    /* CATEGORIES */
 
     .categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
     }
 
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 18px;
-      border: 1px solid #e5e7eb;
-      transition: 0.25s;
+    .category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 23px;
+      transition: .25s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,.02);
     }
 
-    .card:hover {
+    .category:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
     }
 
-    .card h3 {
-      margin-bottom: 8px;
+    .category-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
     }
 
-    .card p {
-      color: #6b7280;
+    .category h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .category p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* AI */
+
+    .ai-card {
+      padding: 55px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #12141c, #1b1730);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ai-card h2 {
+      font-size: 40px;
+    }
+
+    .ai-card p {
+      max-width: 620px;
+      margin: 12px auto 25px;
+      color: #bfc3d0;
+    }
+
+    /* TOOLS */
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .tool {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 23px;
+      border-radius: 20px;
+    }
+
+    .tool-icon {
+      font-size: 25px;
+    }
+
+    .tool h3 {
+      margin-top: 12px;
+    }
+
+    .tool p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 5px 0 18px;
+    }
+
+    .tool a {
+      color: var(--accent);
+      font-weight: 800;
       font-size: 14px;
     }
 
-    .ai-box {
-      max-width: 900px;
-      margin: auto;
-      padding: 45px;
-      border-radius: 25px;
-      background: #111827;
-      color: white;
-      text-align: center;
+    /* TRUST */
+
+    .trust {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
     }
 
-    .ai-box p {
-      color: #d1d5db;
-      margin: 12px auto 25px;
-      max-width: 600px;
+    .trust-card {
+      padding: 25px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface);
     }
+
+    .trust-card strong {
+      display: block;
+      margin-top: 7px;
+    }
+
+    .trust-card span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
 
     footer {
-      background: #111827;
+      margin-top: 50px;
+      background: #0b0c10;
       color: white;
-      text-align: center;
-      padding: 35px 20px;
+      padding: 55px 24px;
     }
 
-    @media (max-width: 700px) {
-      header {
-        flex-direction: column;
-        gap: 15px;
+    .footer-inner {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 35px;
+    }
+
+    footer h3 {
+      margin-bottom: 12px;
+    }
+
+    footer a {
+      display: block;
+      color: #aeb3c0;
+      margin: 7px 0;
+      font-size: 14px;
+    }
+
+    .copyright {
+      max-width: 1250px;
+      margin: 35px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #252730;
+      color: #8e94a2;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 1000px) {
+      .categories {
+        grid-template-columns: repeat(3, 1fr);
       }
 
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
+      .tools {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav {
+        padding: 12px 15px;
+      }
+
+      .brand {
+        font-size: 19px;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .login-btn {
+        padding: 9px 12px;
       }
 
       .hero {
-        padding-top: 60px;
+        padding: 70px 18px 50px;
       }
 
-      .search-box {
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .search {
         flex-direction: column;
-        gap: 8px;
+      }
+
+      .search button {
+        width: 100%;
+      }
+
+      section {
+        padding: 55px 18px;
+      }
+
+      .categories,
+      .tools,
+      .trust {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-card {
+        padding: 35px 20px;
+      }
+
+      .ai-card h2 {
+        font-size: 30px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -189,115 +498,319 @@
 
 <body>
 
-  <header>
-    <div class="logo">ERROREN</div>
+  <!-- NAVIGATION -->
 
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Tools</a>
-      <a href="#">Pricing</a>
-      <a href="#">AI Chat</a>
-      <a href="#">Help</a>
-      <button>Login</button>
-    </nav>
+  <header>
+    <div class="nav">
+
+      <a class="brand" href="#">
+        <span class="brand-mark">E</span>
+        ERROREN
+      </a>
+
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#tools">Tools</a>
+        <a href="#categories">Categories</a>
+        <a href="#ai">AI Chat</a>
+        <a href="#">Pricing</a>
+        <a href="#">Help</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" onclick="toggleTheme()" title="Theme">
+          🌙
+        </button>
+
+        <button class="login-btn">
+          Login
+        </button>
+      </div>
+
+    </div>
   </header>
+
+
+  <!-- HERO -->
 
   <main>
 
     <section class="hero">
-      <h1>Create. Build. Grow.</h1>
+
+      <div class="badge">
+        ✦ Your Digital Toolkit
+      </div>
+
+      <h1>
+        Create.
+        <span class="gradient-text">Build.</span>
+        Grow.
+      </h1>
 
       <p>
-        Everything you need for web development, app development,
+        One powerful platform for web development, app development,
         SEO, graphic design, AI, social media and more.
       </p>
 
-      <div class="search-box">
+      <div class="search">
+
         <input
           type="text"
           placeholder="What do you want to do?"
         >
-        <button>Search</button>
+
+        <button>
+          Search
+        </button>
+
       </div>
+
+      <div class="search-options">
+        <span>🧰 ERROREN Tools</span>
+        <span>🌐 Web Search</span>
+        <span>🤖 Ask AI</span>
+      </div>
+
     </section>
 
-    <section>
-      <h2 class="section-title">Explore ERROREN</h2>
+
+    <!-- CATEGORIES -->
+
+    <section id="categories">
+
+      <div class="section-head">
+        <h2>Everything in one place.</h2>
+        <p>Explore tools built for creators, developers, freelancers and businesses.</p>
+      </div>
 
       <div class="categories">
 
-        <div class="card">
-          <h3>🌐 Web Development</h3>
+        <div class="category">
+          <div class="category-icon">🌐</div>
+          <h3>Web Development</h3>
           <p>Build websites with code, AI and powerful tools.</p>
         </div>
 
-        <div class="card">
-          <h3>📱 App Development</h3>
-          <p>Create and develop modern applications.</p>
+        <div class="category">
+          <div class="category-icon">📱</div>
+          <h3>App Development</h3>
+          <p>Create modern applications and projects.</p>
         </div>
 
-        <div class="card">
-          <h3>🔍 SEO</h3>
-          <p>Improve your website visibility and performance.</p>
+        <div class="category">
+          <div class="category-icon">🔍</div>
+          <h3>SEO</h3>
+          <p>Analyze and improve your online visibility.</p>
         </div>
 
-        <div class="card">
-          <h3>🎨 Graphic Design</h3>
-          <p>Create logos, images, posts and professional designs.</p>
+        <div class="category">
+          <div class="category-icon">🎨</div>
+          <h3>Graphic Design</h3>
+          <p>Create professional visual content.</p>
         </div>
 
-        <div class="card">
-          <h3>📱 Social Media</h3>
-          <p>Tools for YouTube, Instagram, TikTok and more.</p>
+        <div class="category">
+          <div class="category-icon">📱</div>
+          <h3>Social Media</h3>
+          <p>Grow your YouTube, TikTok, Instagram and more.</p>
         </div>
 
-        <div class="card">
-          <h3>🤖 AI Tools</h3>
-          <p>Powerful AI tools for everyday work.</p>
+        <div class="category">
+          <div class="category-icon">🤖</div>
+          <h3>AI Tools</h3>
+          <p>Powerful AI for everyday work.</p>
         </div>
 
-        <div class="card">
-          <h3>💼 Freelancer & Business</h3>
-          <p>Tools to help freelancers and businesses grow.</p>
+        <div class="category">
+          <div class="category-icon">💼</div>
+          <h3>Freelancer & Business</h3>
+          <p>Tools for professional work and business.</p>
         </div>
 
-        <div class="card">
-          <h3>📄 PDF & Documents</h3>
-          <p>Create, convert and manage documents.</p>
+        <div class="category">
+          <div class="category-icon">📄</div>
+          <h3>PDF & Documents</h3>
+          <p>Create and manage professional documents.</p>
         </div>
 
-        <div class="card">
-          <h3>🎬 Video & Audio</h3>
-          <p>Useful tools for video and audio creators.</p>
+        <div class="category">
+          <div class="category-icon">🎬</div>
+          <h3>Video & Audio</h3>
+          <p>Tools for creators and media projects.</p>
         </div>
 
-        <div class="card">
-          <h3>☁️ Domain & Hosting</h3>
-          <p>Search domains and manage website hosting.</p>
+        <div class="category">
+          <div class="category-icon">☁️</div>
+          <h3>Domain & Hosting</h3>
+          <p>Search domains and manage hosting.</p>
         </div>
 
       </div>
+
     </section>
 
-    <section>
-      <div class="ai-box">
+
+    <!-- AI -->
+
+    <section id="ai">
+
+      <div class="ai-card">
+
         <h2>🤖 Ask ERROREN AI</h2>
 
         <p>
-          Have a question? Get help with your work,
-          tools and projects.
+          Ask questions, get ideas, understand tools and get help
+          with your projects — all in one free AI chat.
         </p>
 
-        <button>Start AI Chat</button>
+        <button class="primary">
+          Start AI Chat →
+        </button>
+
       </div>
+
+    </section>
+
+
+    <!-- POPULAR TOOLS -->
+
+    <section id="tools">
+
+      <div class="section-head">
+        <h2>Popular Tools</h2>
+        <p>Quick access to some of the tools users will love.</p>
+      </div>
+
+      <div class="tools">
+
+        <div class="tool">
+          <div class="tool-icon">🌐</div>
+          <h3>Website Builder</h3>
+          <p>Create a website with AI, code or visual tools.</p>
+          <a href="#">Open Tool →</a>
+        </div>
+
+        <div class="tool">
+          <div class="tool-icon">📱</div>
+          <h3>App Builder</h3>
+          <p>Start building your application.</p>
+          <a href="#">Open Tool →</a>
+        </div>
+
+        <div class="tool">
+          <div class="tool-icon">🎨</div>
+          <h3>Logo Maker</h3>
+          <p>Create professional logo concepts.</p>
+          <a href="#">Open Tool →</a>
+        </div>
+
+        <div class="tool">
+          <div class="tool-icon">🖼️</div>
+          <h3>Background Remover</h3>
+          <p>Remove image backgrounds quickly.</p>
+          <a href="#">Open Tool →</a>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRUST -->
+
+    <section>
+
+      <div class="trust">
+
+        <div class="trust-card">
+          🔒
+          <strong>Secure</strong>
+          <span>Built with privacy in mind.</span>
+        </div>
+
+        <div class="trust-card">
+          ⚡
+          <strong>Fast</strong>
+          <span>Designed for speed.</span>
+        </div>
+
+        <div class="trust-card">
+          🌍
+          <strong>Global</strong>
+          <span>Made for local & international users.</span>
+        </div>
+
+        <div class="trust-card">
+          💬
+          <strong>Support</strong>
+          <span>Help when you need it.</span>
+        </div>
+
+      </div>
+
     </section>
 
   </main>
 
+
+  <!-- FOOTER -->
+
   <footer>
-    <strong>ERROREN</strong>
-    <p>Everything you need to create, build & grow.</p>
+
+    <div class="footer-inner">
+
+      <div>
+        <h3>ERROREN</h3>
+        <p>
+          Everything you need to create, build & grow.
+        </p>
+      </div>
+
+      <div>
+        <h3>Platform</h3>
+        <a href="#">Tools</a>
+        <a href="#">Pricing</a>
+        <a href="#">AI Chat</a>
+        <a href="#">Domain & Hosting</a>
+      </div>
+
+      <div>
+        <h3>Support</h3>
+        <a href="#">Help Center</a>
+        <a href="#">Contact Support</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Report a Problem</a>
+      </div>
+
+      <div>
+        <h3>Legal</h3>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Refund Policy</a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 ERROREN. All rights reserved.
+    </div>
+
   </footer>
+
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+
+      const button = document.querySelector(".icon-btn");
+
+      if (document.body.classList.contains("dark")) {
+        button.textContent = "☀️";
+      } else {
+        button.textContent = "🌙";
+      }
+    }
+  </script>
 
 </body>
 </html>
